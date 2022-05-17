@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeClass;
 
 public class BaseClass {
 	
-	public  WebDriver driver;
+	public  static WebDriver driver;
 	public  int iBrowser = 5; 
 	public String sURL = "https://uibank.uipath.com/";
 	
