@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import base.BaseClass;
 
@@ -8,6 +9,11 @@ public class EmailVerificationPage extends BaseClass{
 	
 	private By oWelcome = By.xpath("//h2[contains(text(),'Welcome To The UiBank Family!')]");
 	private By oLogin = By.linkText("Login");
+	private WebDriver driver;
+
+	public EmailVerificationPage(WebDriver driver) {
+		this.driver = driver;
+	}
 	
 	public EmailVerificationPage verifyUserRegistration() {
 		boolean displayed = driver.findElement(oWelcome).isDisplayed();
@@ -21,7 +27,7 @@ public class EmailVerificationPage extends BaseClass{
 	
 	public LoginPage clickOnLogin() {
 		driver.findElement(oLogin).click();
-		return new LoginPage();
+		return new LoginPage(driver);
 	}
 	
 

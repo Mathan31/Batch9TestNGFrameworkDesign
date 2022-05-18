@@ -3,6 +3,7 @@ package tests;
 import java.util.Random;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import base.BaseClass;
@@ -11,25 +12,30 @@ import pages.RegistrationPage;
 
 public class TC2RegistrationTestScenario extends BaseClass{
 	
+	@BeforeTest
+	public void testSetUp() {
+		excelName = "TC002";
+	}
+	
 	@Test(priority = 1)
 	public void validateAllTheElements() {
-		boolean result = new LoginPage()
+		boolean result = new LoginPage(driver)
 		.clickOnRegistrationLink()
 		.verifyAllTheFields();
 		Assert.assertEquals(result, true);
-		new RegistrationPage().clickOnUILogo();
+		new RegistrationPage(driver).clickOnUILogo();
 	}
 	
-	@Test(priority = 2)
-	public void newUserRegistrationWithMandatoryFields() {
-		boolean result = new LoginPage()
+	@Test(priority = 2,dataProvider = "ExcelData")
+	public void newUserRegistrationWithMandatoryFields(String fName,String title,String gender,String uName,String email,String password) {
+		boolean result = new LoginPage(driver)
 		.clickOnRegistrationLink()
-		.enterFirstName("CredoSystemz")
-		.selectTitle("Mr")
-		.selectGender("Male")
-		.enterUserName("Credo001"+getRandomIntNumber(100,10000))
-		.enterEmailAddress("credo.systemz"+getRandomIntNumber(100,10000)+"@credo.com")
-		.enterPassword("Testing123")
+		.enterFirstName(fName)
+		.selectTitle(title)
+		.selectGender(gender)
+		.enterUserName(uName+getRandomIntNumber(100,10000))
+		.enterEmailAddress(email+getRandomIntNumber(100,10000)+"@credo.com")
+		.enterPassword(password)
 		.clickRegisterButton()
 		.verifyUserRegistration()
 		.clickOnLogin()
