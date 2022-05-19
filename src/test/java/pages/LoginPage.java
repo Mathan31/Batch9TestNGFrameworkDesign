@@ -3,7 +3,10 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.aventstack.extentreports.ExtentTest;
+
 import base.BaseClass;
+import library.SeleniumWrapper;
 
 public class LoginPage extends BaseClass{
 	
@@ -14,14 +17,18 @@ public class LoginPage extends BaseClass{
 	private By oRegisterLink = By.xpath("//*[text()='Register For Account']");
 	private By oLoginFailedInnerText = By.xpath("//div[contains(text(),'login failed')]");
 	private WebDriver driver;
+	private ExtentTest node;
+	private SeleniumWrapper wrap;
 	
-	public LoginPage(WebDriver driver) {
+	public LoginPage(WebDriver driver,ExtentTest node) {
 		this.driver = driver;
+		this.node = node;
+		wrap = new SeleniumWrapper(driver, node);
 	}
 	
 	public boolean validateAllTheElementsInLoginPage() {
-		if(driver.findElement(oUsernameText).isDisplayed() && driver.findElement(oPasswordText).isDisplayed()
-			&& driver.findElement(oSignInBtn).isDisplayed()	&& driver.findElement(oRegisterLink).isDisplayed()) {
+		if( wrap.verifyDisplayedwithReturn(driver.findElement(oUsernameText)) && wrap.verifyDisplayedwithReturn(driver.findElement(oPasswordText))
+			&& wrap.verifyDisplayedwithReturn(driver.findElement(oSignInBtn))	&& wrap.verifyDisplayedwithReturn(driver.findElement(oRegisterLink))) {
 			return true;
 		}else {
 			return false;
@@ -29,27 +36,28 @@ public class LoginPage extends BaseClass{
 	}
 	
 	public LoginPage enterUserName(String uName) {
-		driver.findElement(oUsernameText).sendKeys(uName);
+		wrap.type(driver.findElement(oUsernameText), uName);
 		return this;
 	}
 	
 	public LoginPage enterPassword(String sPassword) {
-		driver.findElement(oPasswordText).sendKeys(sPassword);
+		wrap.type(driver.findElement(oPasswordText), sPassword);
 		return this;
 	}
 	
 	public HomePage clickOnSignInButton() {
-		driver.findElement(oSignInBtn).click();
-		return new HomePage(driver);
+		wrap.click(driver.findElement(oSignInBtn));
+		return new HomePage(driver,node);
 	}
 	
 	public LoginPage clickOnSignInButtonwithInvalidDetails() {
-		driver.findElement(oSignInBtn).click();
+		wrap.click(driver.findElement(oSignInBtn));
 		return this;
 	}
 	
 	public boolean validateFailureMsg() {
-		if(driver.findElement(oLoginFailedInnerText).isDisplayed()) {
+		
+		if(wrap.verifyDisplayedwithReturn(driver.findElement(oLoginFailedInnerText))) {
 			return true;
 		}else {
 			return false;
@@ -57,8 +65,8 @@ public class LoginPage extends BaseClass{
 	}
 	
 	public RegistrationPage clickOnRegistrationLink() {
-		driver.findElement(oRegisterLink).click();
-		return new RegistrationPage(driver);
+		wrap.click(driver.findElement(oRegisterLink));
+		return new RegistrationPage(driver,node);
 	}
 	
 	

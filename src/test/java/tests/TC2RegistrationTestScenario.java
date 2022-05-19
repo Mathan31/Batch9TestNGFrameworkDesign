@@ -15,20 +15,25 @@ public class TC2RegistrationTestScenario extends BaseClass{
 	@BeforeTest
 	public void testSetUp() {
 		excelName = "TC002";
+		testCaseName = "Registration";
+		testDescription = "Validating Registration Functionality";
+		module = "Registration module";
+		authors = "Thilo";
+		category = "Sanity";
 	}
 	
 	@Test(priority = 1)
 	public void validateAllTheElements() {
-		boolean result = new LoginPage(driver)
+		boolean result = new LoginPage(driver,node)
 		.clickOnRegistrationLink()
 		.verifyAllTheFields();
 		Assert.assertEquals(result, true);
-		new RegistrationPage(driver).clickOnUILogo();
+		new RegistrationPage(driver,node).clickOnUILogo();
 	}
 	
 	@Test(priority = 2,dataProvider = "ExcelData")
 	public void newUserRegistrationWithMandatoryFields(String fName,String title,String gender,String uName,String email,String password) {
-		boolean result = new LoginPage(driver)
+		boolean result = new LoginPage(driver,node)
 		.clickOnRegistrationLink()
 		.enterFirstName(fName)
 		.selectTitle(title)
