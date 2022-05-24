@@ -15,7 +15,7 @@ public class TC1LoginTestScenario extends BaseClass{
 		testCaseName = "Login";
 		testDescription = "Validating Login Functionality";
 		module = "Login module";
-		authors = "Mohanraj";
+		authors = "Shymala";
 		category = "Smoke";
 	}
 		
