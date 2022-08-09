@@ -13,7 +13,7 @@ public class TC1LoginTestScenario extends BaseClass{
 	public void testSetUp() {
 		excelName = "TC001";
 		testCaseName = "Login";
-		testDescription = "Validating Login Functionality";
+		testDescription = "Validating Login Functionality with 3 test cases";
 		module = "Login module";
 		authors = "Shymala";
 		category = "Smoke";

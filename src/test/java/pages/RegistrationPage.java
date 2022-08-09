@@ -12,8 +12,6 @@ import library.SeleniumWrapper;
 public class RegistrationPage extends BaseClass{
 	
 	private By oFirstName = By.id("firstName");
-	private By oMiddleName = By.id("middleName");
-	private By oLastName = By.id("lastName");
 	private By oUserName = By.id("username");
 	private By oEmail = By.id("email");
 	private By oPassword = By.id("password");
@@ -21,10 +19,6 @@ public class RegistrationPage extends BaseClass{
 	private By oTitle = By.id("title");
 	private By oGender = By.id("sex");
 	private By oUILogo = By.xpath("//a[@class='navbar-brand']");
-	private By oEmploymentStatus = By.id("employmentStatus");
-	private By oAge = By.id("age");
-	private By oMartialStatus = By.id("maritalStatus");
-	private By oNumberOfDependents = By.id("numberOfDependents");
 	private WebDriver driver;
 	private ExtentTest node;
 	private SeleniumWrapper wrap;
